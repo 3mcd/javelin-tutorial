@@ -1,0 +1,36 @@
+{
+  "name": "javelin-tutorial",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build:server": "tsc -p server/tsconfig.json",
+    "start": "concurrently -k \"npm:start:client\" \"npm:watch:server\"",
+    "start:client": "vite --config client/vite.config.ts",
+    "start:server": "npm run build:server && node -r esm server/dist/server/src/index.js",
+    "watch:server": "nodemon -e js,ts --watch server/src --watch common --exec npm run start:server",
+    "debug": "concurrently -k \"npm:start:client\" \"npm:debug:server\"",
+    "debug:server": "npm run build:server && ndb node -r esm server/dist/server/src/index.js"
+  },
+  "dependencies": {
+    "@dimforge/rapier2d": "^0.5.3",
+    "@javelin/ecs": "^1.0.0-alpha.2",
+    "@javelin/hrtime-loop": "^0.22.0",
+    "@javelin/net": "^1.0.0-alpha.2",
+    "@javelin/pack": "^1.0.0-alpha.1",
+    "@javelin/track": "^1.0.0-alpha.2",
+    "@web-udp/client": "^4.2.1",
+    "@web-udp/server": "^4.2.1",
+    "stats.js": "^0.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.3.0",
+    "concurrently": "^6.1.0",
+    "esm": "^3.2.25",
+    "ndb": "^1.1.5",
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.4",
+    "vite": "^2.3.2",
+    "vite-plugin-full-reload": "^0.2.2"
+  }
+}
